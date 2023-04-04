@@ -1,31 +1,28 @@
 #pragma once
+#include <inttypes.h>
+#include <stddef.h>
 
-#include <stdint.h>
-#include <stdio.h>
-
-typedef struct dll_block_t {
+/* TODO : add your implementation for doubly-linked list */
+typedef struct list_t {
   void *data;
-  struct dll_block_t *prev;
-  struct dll_block_t *next;
-} dll_block_t;
+  struct list_t *prev;
+  struct list_t *next;
+} list_t;
 
-typedef struct block_t {
-  uint64_t start_address;  // adresa de început a zonei, un indice din arenă
-  size_t size;             // dimensiunea totală a zonei, suma size-urilor
-                           // miniblock-urilor
-  dll_block_t* miniblock_list;    // lista de miniblock-uri adiacente
+typedef struct {
+  uint64_t start_address;
+  size_t size;
+  void *miniblock_list;
 } block_t;
 
-typedef struct mblock_t {
-  uint64_t start_address;  // adresa de început a zonei, un indice din arenă
-  size_t size;             // size-ul miniblock-ului
-  uint8_t perm;            // permisiunile asociate zonei, by default RW-
-  void* rw_buffer;  // buffer-ul de date, folosit pentru opearțiile de read()
-                    // și write()
-} mblock_t;
+typedef struct {
+  uint64_t start_address;
+  size_t size;
+  uint8_t perm;
+  void *rw_buffer;
+} miniblock_t;
 
-typedef struct arena_t {
-  uint64_t size;
-  size_t used_mem, blocks, mblocks;
-  dll_block_t *list;
+typedef struct {
+  uint64_t arena_size, used_mem, blocks, mblocks;
+  list_t *alloc_list;
 } arena_t;

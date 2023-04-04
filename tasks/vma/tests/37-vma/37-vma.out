@@ -3780,7 +3780,7 @@ Invalid address for free.
 Total memory: 0x1388000 bytes
 Free memory: 0x9C101A bytes
 Number of allocated blocks: 1251
-Number of allocated miniblocks: 1246
+Number of allocated miniblocks: 2513
 
 Block 1 begin
 Zone: 0x109 - 0x23D
@@ -11302,7 +11302,7 @@ Invalid address for free.
 Total memory: 0x1388000 bytes
 Free memory: 0x9C101A bytes
 Number of allocated blocks: 1251
-Number of allocated miniblocks: 1245
+Number of allocated miniblocks: 2513
 
 Block 1 begin
 Zone: 0x109 - 0x23D

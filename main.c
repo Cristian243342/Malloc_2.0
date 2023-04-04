@@ -2,15 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alloc.h"
-#include "free.h"
-#include "mprotect.h"
-#include "pmap.h"
-#include "rw.h"
-#include "struct.h"
-//#include "vma.h"
-
-arena_t *arena;
+// #include "free.h"
+// #include "mprotect.h"
+// #include "pmap.h"
+// #include "rw.h"
+//#include "struct.h"
+#include "vma.h"
 
 #define INTERPRET(cmd, string, c)           \
   do {                                      \
@@ -30,35 +27,70 @@ char interpret_cmd(char cmd[15]) {
 }
 
 int main(void) {
-  char *cmd, cpy[15];
+  arena_t *arena = NULL;
+  char *cmd;
+  int8_t *data;
+  uint64_t size, address;
   while (1) {
-    scanf("\n%m[^\n]", &cmd);
-    sscanf(cmd, "%s", cpy);
-    switch (interpret_cmd(cpy)) {
+    scanf("%ms", &cmd);
+    switch (interpret_cmd(cmd)) {
       case 'a':
-        alloc_arena(cmd);
+        if (arena) {
+          puts("Arena already allocated.");
+          break;
+        }
+        if (scanf("%lu", &size) != 1) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        arena = alloc_arena(size);
         break;
       case 'b':
-        dealloc_arena();
+        if (arena)
+          dealloc_arena(arena);
         free(cmd);
         return 0;
       case 'c':
-        alloc_block(cmd);
+        if (scanf("%lu%lu", &address, &size) != 2) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        alloc_block(arena, address, size);
         break;
       case 'd':
-        free_block(cmd);
+        if (scanf("%lu", &address) != 1) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        free_block(arena, address);
         break;
       case 'e':
-        read(cmd);
+        if (scanf("%lu%lu", &address, &size) != 2) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        read(arena, address, size);
         break;
       case 'f':
-        write(cmd);
+        if (scanf("%lu%lu", &address, &size) != 2) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        data = malloc(size * sizeof(int8_t));
+        fread(data, sizeof(int8_t), 1, stdin);
+        fread(data, sizeof(int8_t), size, stdin);
+        write(arena, address, size, data);
         break;
       case 'g':
-        pmap();
+        pmap(arena);
         break;
       case 'h':
-        mprotect(cmd);
+        if (scanf("%lu", &address) != 1) {
+          puts("Invalid command. Please try again.");
+          break;
+        }
+        scanf("%m[^\n]", &data);
+        mprotect(arena, address, data);
         break;
       case '0':
         puts("Invalid command. Please try again.");

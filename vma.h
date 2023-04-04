@@ -1,27 +1,5 @@
 #pragma once
-#include <inttypes.h>
-#include <stddef.h>
-
-/* TODO : add your implementation for doubly-linked list */
-typedef struct { } list_t;
-
-typedef struct {
-	uint64_t start_address;
-	size_t size;
-	void *miniblock_list;
-} block_t;
-
-typedef struct {
-	uint64_t start_address;
-	size_t size;
-	uint8_t perm;
-	void *rw_buffer;
-} miniblock_t;
-
-typedef struct {
-	uint64_t arena_size;
-	list_t *alloc_list;
-} arena_t;
+#include "struct.h"
 
 arena_t *alloc_arena(const uint64_t size);
 void dealloc_arena(arena_t *arena);

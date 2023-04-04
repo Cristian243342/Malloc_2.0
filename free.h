@@ -1,4 +1,4 @@
 #pragma once
 
-void free_block(char *cmd);
-void dealloc_arena(void);
+void free_mblock(list_t *block);
+void free_block_dealloc(list_t *block);

@@ -1,3 +1,3 @@
 #pragma once
 
-void mprotect(char *cmd);
+char interpret_prot_str(char prot_str[15]);

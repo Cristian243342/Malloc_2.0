@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-Wall -Wextra -std=c99
 DEPS=
 
-OBJ += alloc.o main.o free.o mprotect.o rw.o pmap.o
+OBJ += main.o vma.o alloc.o free.o mprotect.o
 
 %.o: %.c
 	$(CC) -g -c -o $@ $< $(CFLAGS) -lm

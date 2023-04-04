@@ -12,10 +12,6 @@ void write(char *cmd) {
     puts("Arena not allocated.");
     return;
   }
-  if (!arena->list) {
-    puts("Invalid address for write.");
-    return;
-  }
 
   uint64_t address;
   size_t dim;
@@ -34,6 +30,12 @@ void write(char *cmd) {
           stdin);
     memcpy(data, data_prim, strlen(data_prim));
     free(data_prim);
+  }
+
+  if (!arena->list) {
+    free(data);
+    puts("Invalid address for write.");
+    return;
   }
 
   dll_block_t *curr_prim = arena->list;
@@ -123,6 +125,11 @@ void read(char *cmd) {
     if (address < ((mblock_t *)curr_sec->data)->start_address +
                       ((mblock_t *)curr_sec->data)->size)
       break;
+  
+  if (!curr_sec) {
+    puts("Invalid address for read.");
+    return;
+  }
 
   mblock_t *block = ((mblock_t *)curr_sec->data);
   uint64_t offset_prim = address - ((block_t *)curr_prim->data)->start_address;
