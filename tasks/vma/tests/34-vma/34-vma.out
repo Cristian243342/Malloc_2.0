@@ -1,0 +1,198 @@
+Total memory: 0x3C74 bytes
+Free memory: 0x3C74 bytes
+Number of allocated blocks: 0
+Number of allocated miniblocks: 0
+Invalid address for write.
+Invalid command. Please try again.
+Invalid command. Please try again.
+Invalid address for free.
+Invalid command. Please try again.
+Invalid address for write.
+Invalid command. Please try again.
+Invalid address for free.
+Total memory: 0x3C74 bytes
+Free memory: 0x3C74 bytes
+Number of allocated blocks: 0
+Number of allocated miniblocks: 0
+Total memory: 0x3C74 bytes
+Free memory: 0x3C74 bytes
+Number of allocated blocks: 0
+Number of allocated miniblocks: 0
+Total memory: 0x3C74 bytes
+Free memory: 0x3B74 bytes
+Number of allocated blocks: 1
+Number of allocated miniblocks: 1
+
+Block 1 begin
+Zone: 0x104A - 0x114A
+Miniblock 1:		0x104A		-		0x114A		| RW-
+Block 1 end
+Total memory: 0x3C74 bytes
+Free memory: 0x3B74 bytes
+Number of allocated blocks: 1
+Number of allocated miniblocks: 1
+
+Block 1 begin
+Zone: 0x104A - 0x114A
+Miniblock 1:		0x104A		-		0x114A		| RW-
+Block 1 end
+Invalid address for free.
+Invalid address for read.
+Invalid address for write.
+Invalid address for write.
+Invalid address for read.
+Invalid address for write.
+Total memory: 0x3C74 bytes
+Free memory: 0x38CC bytes
+Number of allocated blocks: 5
+Number of allocated miniblocks: 4
+
+Block 1 begin
+Zone: 0x215 - 0x235
+Miniblock 1:		0x215		-		0x235		| RW-
+Block 1 end
+
+Block 2 begin
+Zone: 0x1037 - 0x103F
+Miniblock 1:		0x1037		-		0x103F		| RW-
+Block 2 end
+
+Block 3 begin
+Zone: 0x104A - 0x114A
+Miniblock 1:		0x104A		-		0x114A		| RW-
+Block 3 end
+
+Block 4 begin
+Zone: 0x16B1 - 0x18B1
+Miniblock 1:		0x16B1		-		0x18B1		| RW-
+Block 4 end
+
+Block 5 begin
+Zone: 0x1D16 - 0x1D96
+Miniblock 1:		0x1D16		-		0x1D96		| RW-
+Block 5 end
+Invalid address for write.
+Invalid address for free.
+Invalid address for free.
+Invalid address for free.
+Invalid address for read.
+Total memory: 0x3C74 bytes
+Free memory: 0x356C bytes
+Number of allocated blocks: 9
+Number of allocated miniblocks: 5
+
+Block 1 begin
+Zone: 0x215 - 0x235
+Miniblock 1:		0x215		-		0x235		| RW-
+Block 1 end
+
+Block 2 begin
+Zone: 0x367 - 0x467
+Miniblock 1:		0x367		-		0x467		| RW-
+Block 2 end
+
+Block 3 begin
+Zone: 0xA23 - 0xA63
+Miniblock 1:		0xA23		-		0xA63		| RW-
+Block 3 end
+
+Block 4 begin
+Zone: 0xE69 - 0xE89
+Miniblock 1:		0xE69		-		0xE89		| RW-
+Block 4 end
+
+Block 5 begin
+Zone: 0x1037 - 0x103F
+Miniblock 1:		0x1037		-		0x103F		| RW-
+Block 5 end
+
+Block 6 begin
+Zone: 0x104A - 0x114A
+Miniblock 1:		0x104A		-		0x114A		| RW-
+Block 6 end
+
+Block 7 begin
+Zone: 0x16B1 - 0x18B1
+Miniblock 1:		0x16B1		-		0x18B1		| RW-
+Block 7 end
+
+Block 8 begin
+Zone: 0x1D16 - 0x1D96
+Miniblock 1:		0x1D16		-		0x1D96		| RW-
+Block 8 end
+
+Block 9 begin
+Zone: 0x1D9F - 0x1F9F
+Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
+Block 9 end
+Total memory: 0x3C74 bytes
+Free memory: 0x34EC bytes
+Number of allocated blocks: 10
+Number of allocated miniblocks: 6
+
+Block 1 begin
+Zone: 0x215 - 0x235
+Miniblock 1:		0x215		-		0x235		| RW-
+Block 1 end
+
+Block 2 begin
+Zone: 0x367 - 0x467
+Miniblock 1:		0x367		-		0x467		| RW-
+Block 2 end
+
+Block 3 begin
+Zone: 0xA23 - 0xA63
+Miniblock 1:		0xA23		-		0xA63		| RW-
+Block 3 end
+
+Block 4 begin
+Zone: 0xE69 - 0xE89
+Miniblock 1:		0xE69		-		0xE89		| RW-
+Block 4 end
+
+Block 5 begin
+Zone: 0x1037 - 0x103F
+Miniblock 1:		0x1037		-		0x103F		| RW-
+Block 5 end
+
+Block 6 begin
+Zone: 0x104A - 0x114A
+Miniblock 1:		0x104A		-		0x114A		| RW-
+Block 6 end
+
+Block 7 begin
+Zone: 0x1302 - 0x1382
+Miniblock 1:		0x1302		-		0x1382		| RW-
+Block 7 end
+
+Block 8 begin
+Zone: 0x16B1 - 0x18B1
+Miniblock 1:		0x16B1		-		0x18B1		| RW-
+Block 8 end
+
+Block 9 begin
+Zone: 0x1D16 - 0x1D96
+Miniblock 1:		0x1D16		-		0x1D96		| RW-
+Block 9 end
+
+Block 10 begin
+Zone: 0x1D9F - 0x1F9F
+Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
+Block 10 end
+Invalid address for write.
+This zone was already allocated.
+Invalid address for free.
+Invalid address for read.
+Total memory: 0x3C74 bytes
+Free memory: 0x339C bytes
+Number of allocated blocks: 13
+Number of allocated miniblocks: 8
+
+Block 1 begin
+Zone: 0x215 - 0x235
+Miniblock 1:		0x215		-		0x235		| RW-
+Block 1 end
+
+Block 2 begin
+Zone: 0x367 - 0x467
+Miniblock 1:		0x367	
