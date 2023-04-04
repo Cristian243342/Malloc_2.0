@@ -39,7 +39,8 @@ void write(char *cmd) {
   dll_block_t *curr_prim = arena->list;
   for (; curr_prim; curr_prim = curr_prim->next)
     if (address < ((block_t *)curr_prim->data)->start_address +
-                      ((block_t *)curr_prim->data)->size)
+                      ((block_t *)curr_prim->data)->size &&
+        address >= ((block_t *)curr_prim->data)->start_address)
       break;
 
   if (!curr_prim) {
@@ -144,8 +145,7 @@ void read(char *cmd) {
       puts("Invalid permissions for read.");
       return;
     }
-    if (block->size - offset_sec >= dim)
-      break;
+    if (block->size - offset_sec >= dim) break;
     dim_tmp -= block->size - offset_sec_tmp;
     curr_tmp = curr_tmp->next;
     offset_sec_tmp = 0;
