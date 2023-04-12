@@ -1,15 +1,15 @@
-==32132== Memcheck, a memory error detector
-==32132== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==32132== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==32132== Command: /home/cristian/WD/01_year/02_sem/SD/01_tema/sd-2023-homeworks/vma
-==32132== Parent PID: 32131
-==32132== 
-==32132== 
-==32132== HEAP SUMMARY:
-==32132==     in use at exit: 0 bytes in 0 blocks
-==32132==   total heap usage: 19 allocs, 19 frees, 8,900 bytes allocated
-==32132== 
-==32132== All heap blocks were freed -- no leaks are possible
-==32132== 
-==32132== For lists of detected and suppressed errors, rerun with: -s
-==32132== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2010== Memcheck, a memory error detector
+==2010== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2010== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==2010== Command: /home/cristian/WD/01_year/02_sem/SD/01_tema/sd-2023-homeworks/vma
+==2010== Parent PID: 2009
+==2010== 
+==2010== 
+==2010== HEAP SUMMARY:
+==2010==     in use at exit: 0 bytes in 0 blocks
+==2010==   total heap usage: 19 allocs, 19 frees, 8,900 bytes allocated
+==2010== 
+==2010== All heap blocks were freed -- no leaks are possible
+==2010== 
+==2010== For lists of detected and suppressed errors, rerun with: -s
+==2010== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

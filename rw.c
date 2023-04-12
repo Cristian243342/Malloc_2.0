@@ -1,174 +1,113 @@
+// Copyright Lazar Cristian-Stefan 314CA 2022-2023
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
+#include <inttypes.h>
 
 #include "struct.h"
-#include "utils.h"
 
-extern arena_t *arena;
+// Checks if all the miniblock from which the data will be read have the
+// read permission.
+int8_t check_perm_read(uint64_t size, list_t *curr, uint64_t offset)
+{
+	miniblock_t *block;
+	while (size) {
+		block = ((miniblock_t *)curr->data);
+		if (!(block->perm & (1 << 2))) {
+			puts("Invalid permissions for read.");
+			return 0;
+		}
+		if (block->size - offset >= size)
+			break;
+		size -= block->size - offset;
+		curr = curr->next;
+		offset = 0;
+	}
 
-void write(char *cmd) {
-  if (!arena) {
-    puts("Arena not allocated.");
-    return;
-  }
-
-  uint64_t address;
-  size_t dim;
-  // TO DO........................................................
-  char *data_prim;
-  if (sscanf(cmd, "%*s%lu%lu %m[^\n]", &address, &dim, &data_prim) < 2) {
-    puts("Invalid command. Please try again.");
-    return;
-  }
-
-  char *data = malloc(dim * sizeof(char));
-  if (!data_prim) {
-    fread(data, sizeof(char), dim, stdin);
-  } else {
-    fread(data + strlen(data_prim), sizeof(char), dim - strlen(data_prim),
-          stdin);
-    memcpy(data, data_prim, strlen(data_prim));
-    free(data_prim);
-  }
-
-  if (!arena->list) {
-    free(data);
-    puts("Invalid address for write.");
-    return;
-  }
-
-  dll_block_t *curr_prim = arena->list;
-  for (; curr_prim; curr_prim = curr_prim->next)
-    if (address < ((block_t *)curr_prim->data)->start_address +
-                      ((block_t *)curr_prim->data)->size &&
-        address >= ((block_t *)curr_prim->data)->start_address)
-      break;
-
-  if (!curr_prim) {
-    free(data);
-    puts("Invalid address for write.");
-    return;
-  }
-
-  dll_block_t *curr_sec = ((block_t *)curr_prim->data)->miniblock_list;
-  for (; curr_sec; curr_sec = curr_sec->next)
-    if (address < ((mblock_t *)curr_sec->data)->start_address +
-                      ((mblock_t *)curr_sec->data)->size)
-      break;
-
-  block_t *block = ((block_t *)curr_prim->data);
-  mblock_t *mblock = ((mblock_t *)curr_sec->data);
-  uint64_t offset_prim = address - block->start_address;
-  uint64_t offset_sec = address - mblock->start_address;
-  void *tmp = data;
-
-  if (block->size - offset_prim < dim) {
-    dim = block->size - offset_prim;
-    printf(
-        "Warning: size was bigger than the block size. Writing %lu "
-        "characters.\n",
-        dim);
-  }
-
-  while (dim) {
-    if (!(mblock->perm & (1 << 1))) {
-      free(data);
-      puts("Invalid permissions for write.");
-      return;
-    }
-
-    if (mblock->size - offset_sec >= dim) {
-      memcpy(mblock->rw_buffer + offset_sec, tmp, dim);
-      break;
-    }
-    memcpy(mblock->rw_buffer + offset_sec, tmp, mblock->size - offset_sec);
-    tmp += mblock->size - offset_sec;
-    dim -= mblock->size - offset_sec;
-    curr_sec = curr_sec->next;
-    mblock = ((mblock_t *)curr_sec->data);
-    offset_sec = 0;
-  }
-  free(data);
+	return 1;
 }
 
-void read(char *cmd) {
-  if (!arena) {
-    puts("Arena not allocated.");
-    return;
-  }
-  if (!arena->list) {
-    puts("Invalid address for read.");
-    return;
-  }
+// Reads the data from the block.
+void read_from_block(uint64_t size, list_t *curr, uint64_t offset)
+{
+	uint64_t i;
 
-  uint64_t address;
-  size_t dim;
-  if (sscanf(cmd, "%*s%lu%lu", &address, &dim) != 2) {
-    puts("Invalid command. Please try again.");
-    return;
-  }
+	// Reads the requested data.
+	while (1) {
+		miniblock_t *block = ((miniblock_t *)curr->data);
 
-  dll_block_t *curr_prim = arena->list;
-  for (; curr_prim; curr_prim = curr_prim->next)
-    if (address < ((block_t *)curr_prim->data)->start_address +
-                      ((block_t *)curr_prim->data)->size)
-      break;
+		// Checks if this is the last miniblock from which the data is read.
+		if (block->size - offset >= size) {
+			for (i = 0; i < size; i++)
+				if (((char *)block->rw_buffer + offset)[i] != '\000')
+					printf("%c", ((char *)block->rw_buffer + offset)[i]);
+			printf("\n");
+			break;
+		}
+		for (i = 0; i < block->size - offset; i++)
+			if (((char *)block->rw_buffer + offset)[i] != '\000')
+				printf("%c", ((char *)block->rw_buffer + offset)[i]);
 
-  if (!curr_prim) {
-    puts("Invalid address for read.");
-    return;
-  }
+		// We substract from the mutable size the number of bytes read.
+		size -= block->size - offset;
 
-  dll_block_t *curr_sec = ((block_t *)curr_prim->data)->miniblock_list;
-  for (; curr_sec; curr_sec = curr_sec->next)
-    if (address < ((mblock_t *)curr_sec->data)->start_address +
-                      ((mblock_t *)curr_sec->data)->size)
-      break;
-  
-  if (!curr_sec) {
-    puts("Invalid address for read.");
-    return;
-  }
+		// We move to the next miniblock from which data will be read.
+		curr = curr->next;
 
-  mblock_t *block = ((mblock_t *)curr_sec->data);
-  uint64_t offset_prim = address - ((block_t *)curr_prim->data)->start_address;
-  uint64_t offset_sec = address - block->start_address;
+		// An offset can only exist between the start address of the miniblock
+		// containing the given address. For all other miniblock from which data
+		// is read, the data is read from the start address, so the offset is
+		// made 0.
+		offset = 0;
+	}
+}
 
-  if (((block_t *)curr_prim->data)->size - offset_prim < dim) {
-    dim = ((block_t *)curr_prim->data)->size - offset_prim;
-    printf(
-        "Warning: size was bigger than the block size. Reading %lu "
-        "characters.\n",
-        dim);
-  }
+// Checks if all the miniblock where the data will be writen have the write
+// permission.
+int8_t check_perm_write(uint64_t size, list_t *curr, uint64_t offset)
+{
+	miniblock_t *block;
+	while (size) {
+		block = ((miniblock_t *)curr->data);
+		if (!(block->perm & (1 << 1))) {
+			puts("Invalid permissions for write.");
+			return 0;
+		}
+		if (block->size - offset >= size)
+			break;
+		size -= block->size - offset;
+		curr = curr->next;
+		offset = 0;
+	}
 
-  size_t dim_tmp = dim, offset_sec_tmp = offset_sec;
-  dll_block_t *curr_tmp = curr_sec;
+	return 1;
+}
 
-  while (dim_tmp) {
-    block = ((mblock_t *)curr_tmp->data);
-    if (!(block->perm & (1 << 2))) {
-      puts("Invalid permissions for read.");
-      return;
-    }
-    if (block->size - offset_sec >= dim) break;
-    dim_tmp -= block->size - offset_sec_tmp;
-    curr_tmp = curr_tmp->next;
-    offset_sec_tmp = 0;
-  }
+// Writes the data in the block.
+void write_in_block(uint64_t size, list_t *curr, uint64_t offset, void *data)
+{
+	miniblock_t *mblock;
+	while (size) {
+		mblock = ((miniblock_t *)curr->data);
 
-  block = ((mblock_t *)curr_sec->data);
-  while (dim) {
-    block = ((mblock_t *)curr_sec->data);
-    if (block->size - offset_sec >= dim) {
-      printf("%.*s\n", (int)dim, (char *)block->rw_buffer + offset_sec);
-      break;
-    }
-    printf("%.*s", (int)(block->size - offset_sec),
-           (char *)block->rw_buffer + offset_sec);
-    dim -= block->size - offset_sec;
-    curr_sec = curr_sec->next;
-    offset_sec = 0;
-  }
+		// Checks if this is the last miniblock where the data is writen.
+		if (mblock->size - offset >= size) {
+			memcpy(mblock->rw_buffer + offset, data, size);
+			break;
+		}
+		memcpy(mblock->rw_buffer + offset, data, mblock->size - offset);
+		data += mblock->size - offset;
+
+		// We substract from the mutable size the number of bytes writen.
+		size -= mblock->size - offset;
+
+		// We move to the next miniblock where data will be written.
+		curr = curr->next;
+
+		// An offset can only exist between the start address of the miniblock
+		// containing the given address. For all other miniblock whare data is
+		// written, the data is written from the start address, so the offset is
+		// made 0.
+		offset = 0;
+	}
 }

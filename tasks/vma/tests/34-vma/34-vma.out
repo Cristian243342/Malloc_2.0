@@ -11155,7 +11155,7 @@ This zone was already allocated.
 Invalid address for write.
 Invalid address for free.
 Invalid address for write.
-
+Invalid address for read.
 Total memory: 0x3C74 bytes
 Free memory: 0x2E32 bytes
 Number of allocated blocks: 51
@@ -13021,7 +13021,7 @@ Block 53 begin
 Zone: 0x1D9F - 0x1F9F
 Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 53 end
-
+Invalid address for read.
 Total memory: 0x3C74 bytes
 Free memory: 0x2E20 bytes
 Number of allocated blocks: 53
@@ -13295,7 +13295,7 @@ This zone was already allocated.
 Invalid address for free.
 Invalid address for write.
 This zone was already allocated.
-
+Invalid address for read.
 Invalid address for write.
 Invalid address for write.
 Total memory: 0x3C74 bytes
@@ -14650,9 +14650,9 @@ Block 53 begin
 Zone: 0x1D9F - 0x1F9F
 Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 53 end
-
+Invalid address for read.
 Invalid address for free.
-
+Invalid address for read.
 Invalid address for free.
 Invalid address for free.
 Total memory: 0x3C74 bytes
@@ -15747,7 +15747,7 @@ Warning: size was bigger than the block size. Writing 30 characters.
 CK 9 1
 ALLOC_BLOCK 2028439863 258633899
 ALLOC_BLOCK 7
-
+Invalid address for read.
 Invalid address for free.
 Invalid address for free.
 Invalid address for write.
@@ -16319,7 +16319,7 @@ Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 55 end
 AAA
 Invalid address for read.
-
+Invalid address for read.
 Invalid address for write.
 This zone was already allocated.
 This zone was already allocated.
@@ -16605,7 +16605,7 @@ Zone: 0x1D9F - 0x1F9F
 Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 55 end
 Invalid address for free.
-
+Invalid address for read.
 Invalid address for free.
 Invalid address for free.
 Total memory: 0x3C74 bytes
@@ -18387,7 +18387,7 @@ Invalid address for write.
 Invalid address for write.
 Warning: size was bigger than the block size. Writing 4 characters.
 Invalid address for free.
-Q
+Invalid address for read.
 Invalid address for free.
 Invalid address for free.
 Invalid address for free.
@@ -24836,7 +24836,7 @@ Zone: 0x1D9F - 0x1F9F
 Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 67 end
 Invalid address for write.
-
+Invalid address for read.
 Warning: size was bigger than the block size. Writing 38 characters.
 Total memory: 0x3C74 bytes
 Free memory: 0x2D0A bytes
@@ -28655,7 +28655,7 @@ Block 79 end
 RIsEPBnHRNeIOsTIPwqk
 READ_BLOCK 100 5
 FR
-U
+Invalid address for read.
 Total memory: 0x3C74 bytes
 Free memory: 0x2C8C bytes
 Number of allocated blocks: 79
@@ -57486,7 +57486,7 @@ _BLOCK 5
 K 57130035 854
 06 85
 ALLOC
-Ê
+
 Invalid address for write.
 Invalid address for write.
 This zone was already allocated.
@@ -60015,7 +60015,7 @@ Block 100 begin
 Zone: 0x1D9F - 0x1F9F
 Miniblock 1:		0x1D9F		-		0x1F9F		| RW-
 Block 100 end
-
+Invalid address for read.
 Invalid address for free.
 Total memory: 0x3C74 bytes
 Free memory: 0x2BB8 bytes

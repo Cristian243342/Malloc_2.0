@@ -1,28 +1,46 @@
+// Copyright Lazar Cristian-Stefan 314CA 2022-2023
 #pragma once
 #include <inttypes.h>
 #include <stddef.h>
 
-/* TODO : add your implementation for doubly-linked list */
+// An implementation for nodes of a doubly linked list.
 typedef struct list_t {
-  void *data;
-  struct list_t *prev;
-  struct list_t *next;
+	// Stores a pointer to the data stored in the node.
+	void *data;
+	// Stores a pointer to the previous node.
+	struct list_t *prev;
+	// Stores a pointer to the next node.
+	struct list_t *next;
 } list_t;
 
+// An implementation for memory blocks.
 typedef struct {
-  uint64_t start_address;
-  size_t size;
-  void *miniblock_list;
+	// Stores the start address of the block.
+	uint64_t start_address;
+	// Stores the size in bytes of the block.
+	size_t size;
+	// Stores a pointer to the first node in a doubly linked list of miniblocks.
+	void *miniblock_list;
 } block_t;
 
+// An implementation for memory miniblocks.
 typedef struct {
-  uint64_t start_address;
-  size_t size;
-  uint8_t perm;
-  void *rw_buffer;
+	// Stores the start address of the miniblock.
+	uint64_t start_address;
+	// Stores the size on bytes of the miniblock.
+	size_t size;
+	// Stores the permissions of the miniblock.
+	uint8_t perm;
+	// Stores a pointer to the effective memory allocated with malloc.
+	void *rw_buffer;
 } miniblock_t;
 
+// An implementation for the memory arena.
 typedef struct {
-  uint64_t arena_size, used_mem, blocks, mblocks;
-  list_t *alloc_list;
+	// Stores the size in bytes of the arena, the amount of memory allocated at
+	// any given point, the number of block, and the number of miniblocks
+	// respectively.
+	uint64_t arena_size, used_mem, blocks, mblocks;
+	// Stores a pointer to the first node in a doubly linked list of blocks.
+	list_t *alloc_list;
 } arena_t;
