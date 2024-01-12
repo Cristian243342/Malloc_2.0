@@ -6,13 +6,6 @@ Malloc 2.0 is a virtual memory allocator, which utilizes a virtual arena of addr
 
 ---
 
-## Who is this program for?
-
-* People who hate dealing with the ~~guaranteed~~ potential errors of working directly with memory.
-* People who can't be bothered to learn a programming language in which memory is allocated automatically.
-
----
-
 ## Usage
 
 Once the program is run, the user can execute different commands, listed below:
