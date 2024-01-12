@@ -155,11 +155,3 @@ Once the program is run, the user can execute different commands, listed below:
   * If the last bit is set, then the miniblock has the execute permission.
   * If the second to last bit is set, then the miniblock has the write permission.
   * If the third to last bit is set, then the miniblock has the read permission.
-
----
-
-## The hardest thing <!-- ribbit!-->
-
-By far the hardest part of this homework was understanding it. The ideas presented were a bigger little difficult to understand, which lead to misunderstandings, which, in turn, lead to wastes of time. I think I spent three hours reformating my code because of such a misunderstanding. On the one hand, it's a pretty good learning oportunity, trying to figure what is being asked of me. On the other hand, life at Poli is **BUSY**. I wish I had the time to sit around for three hours and try to understand a task, but I don't, and then I rush into it and stupid mistakes are made. What I will say is, if you wish to challenge us with foreign concepts, try to put more information in the task description. Perhaps some external links to simplified explenations of the concepts, like how a memory allocator works. Even if what this task asked of us isn't nearly as complex as an actual memory allocator, some prior insight might have come in handy in avoiding unnecessary misunderstandings. Plus, having a deeper understanding can make the task seem more purposeful, more exciting and fun, because you do something you understand the meaning of, something you can be proud of, instead of working on something that in your mind is abstract mumbo-jumbo.
-
-All in all, this task would have been fun, if I didn't have, like, 3 other homeworks to worry about **while** trying to understand all of this. I wish I had the time to make stupid mistakes, but I really don't, and I don't think I'm the only one. If I am the only one then, I don't know... Guess I'll throw myself a pity party.
